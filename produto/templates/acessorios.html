@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagens de Celulares</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 2.5rem;
+            color: #333;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            padding: 20px;
+        }
+        .image-container figure {
+            width: 200px;
+            text-align: center;
+            margin: 0;
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        .image-container img:hover {
+            transform: scale(1.1);
+        }
+        .image-container figcaption {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #555;
+        }
+        @media (max-width: 768px) {
+            .image-container {
+                gap: 15px;
+                flex-direction: column;
+                align-items: center;
+            }
+            .image-container figure {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Galeria de Acessórios</h1>
+    <div class="container">
+        {% for produto in produtos %}
+            <div class="card" style="width: 18rem; margin-bottom: 20px;">
+         <img class="card-img-top" src="/media/produtos/iPhone-16-Pro-Max.jpg" alt="{{ produto.nome }}" style="width: 100px; height: auto;">
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ produto.nome }}</h5>
+                    <p class="card-text">{{ produto.descricao }}</p>
+                    <a href="#" class="btn btn-primary">Comprar</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
