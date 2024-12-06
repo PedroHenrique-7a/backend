@@ -2,41 +2,128 @@
 {% load static %}
 
 <html lang="pt-br">
-  <head>
+<head>
     <!-- Meta tags Obrigatórias -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-      <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-pzjw8f+ua7Kw1TIq0yM6iZDG65pmzG7G3T6j3e4nQFFiqF6f3PA/yBKTonPz0vVj" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
     <title>Celular Amigo</title>
-  </head>
-  <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Alterna navegação">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
+    <!-- Google Fonts for better typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
-      <li class="nav-item">
-        <a class="nav-link" href="">Dados Pessoais</a>
-      </li>
+    <!-- Custom CSS for styling -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7fc;
+        }
+
+        .navbar {
+            background-color: #333;
+        }
+
+        .navbar .navbar-brand {
+            color: #fff;
+        }
+
+        .navbar .nav-link {
+            color: #fff;
+        }
+
+        .navbar .nav-link:hover {
+            color: #f8a400;
+        }
+
+        .navbar-nav.ml-auto .nav-item .navbar-text {
+            color: #fff;
+        }
+
+        .hero-section {
+            background: linear-gradient(90deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("{% static 'images/hero-banner.jpg' %}") no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .footer a {
+            color: #f8a400;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">Celular Amigo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Alterna navegação">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                {% if cliente.id %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'exibir_cli' id=cliente.id %}">Dados Pessoais</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {% if request.session.cliente_nome %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Sair</a>
+                    </li>
+                    <li class="nav-item">
+                        <span class="navbar-text">Bem-vindo, {{ request.session.cliente_nome }}!</span>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'flogin' %}">Entrar</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>Bem-vindo ao Celular Amigo!</h1>
+        <p>Aqui você encontra os melhores celulares e acessórios. Navegue por nossa seleção e aproveite as ofertas especiais!</p>
+    </div>
+
+    <!-- Main Content (Products, etc.) -->
 
 
-    </ul>
-  </div>
-</nav>
 
 
-<!-- JavaScript (Opcional) -->
-    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <!-- JavaScript (Opcional) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  </body>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0yM6iZDG65pmzG7G3T6j3e4nQFFiqF6f3PA/yBKTonPz0vVj" crossorigin="anonymous"></script>
+
+</body>
 </html>

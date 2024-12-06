@@ -28,6 +28,7 @@ urlpatterns = [
     path('fhistoria/', fhistoria, name='fhistoria'),
     path('findex/', findex, name='findex'),
 
+
 ]
 
 

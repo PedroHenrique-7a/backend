@@ -11,7 +11,7 @@
     <title>Celular Amigo!</title>
   </head>
   <body>
-  <a href="{% url 'fcadproduto' %}" ><button type="button" class="btn-info"> Cadastrar Produto</button></a>
+  <a href="{% url 'produto:fcadproduto' %}" ><button type="button" class="btn-info"> Cadastrar Produto</button></a>
 
     <h1 class=" text-center">Relatorio de produtos</h1>
 
@@ -45,9 +45,12 @@
 
         <td>
 
-      <a href="{% url 'editar' produto.id %}" ><button type="button" class="btn btn-info"> Editar</button></a>
+      <a href="{% url 'produto:editar' produto.id %}"><button type="button" class="btn btn-info"> Editar</button></a>
 
-      <a href="{% url 'excluir' produto.id %}"><button type="button" class="btn btn-danger"> Excluir</button></a>
+
+
+      <a href="{% url 'produto:excluir' produto.id %}"><button type="button" class="btn btn-danger"> Excluir</button></a>
+
         </td>
     </tr>
   {% endfor%}

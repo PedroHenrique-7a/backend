@@ -17,17 +17,21 @@ Including another URLconf
 
 
 from django.contrib import admin
+
 from django.urls import path
-from .views import fcliente, Fcadcliente, salvar_cli, exibir_cli, excluir_cli, login, ftelacli, logar, Frel
+
+from .views import fcliente, Fcadcliente, salvar_cli, exibir_cli, excluir_cli, login, ftelacli, logar, Frel, logout
 urlpatterns = [
     path('', fcliente),
     path('Fcadcliente/',Fcadcliente, name='Fcadcliente'),
     path('salvar_cli/', salvar_cli, name='salvar_cli'),
     path('excluir_cli/<int:id>', excluir_cli, name='excluir_cli'),
-    path('exibir_cli/<int:id>', exibir_cli, name='exibir_cli'),
+    path('cliente/exibir_cli/<int:id>/', exibir_cli, name='exibir_cli') ,
     path('login/', login, name='login'),
     path('ftelacli/', ftelacli, name='ftelacli'),
     path('Frel/', Frel, name='Frel'),
-    path('logar/', logar, name='logar')
+    path('logar/', logar, name='logar'),
+    path('cliente/logout/', logout, name='logout')
 
 ]
+

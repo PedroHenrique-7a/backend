@@ -28,7 +28,11 @@ def salvar_cli(request):
     return redirect(fcliente)
 
 def exibir_cli(request, id):
-    cliente = Cliente.objects.get(id=id)
+    try:
+        cliente = Cliente.objects.get(id=id)
+    except Cliente.DoesNotExist:
+        messages.error(request, "Cliente não encontrado.")
+        return redirect('fcliente')  # Redireciona de volta para a lista de clientes, caso o cliente não seja encontrado.
     return render(request, "update_cli.html", {"cliente": cliente})
 
 
@@ -43,15 +47,14 @@ def logar(request):
         email = request.POST.get("username")
         senha = request.POST.get("password")
 
-        # Verifique se os campos estão preenchidos
         if email and senha:
-            # Busca todos os clientes com o e-mail fornecido
             clientes = Cliente.objects.filter(email=email)
 
             if clientes.exists():
                 cliente = clientes.first()  # Pega o primeiro cliente encontrado
                 if check_password(senha, cliente.senha):  # Use o check_password para comparar senhas criptografadas
-                    # Redireciona para a tela do cliente
+                    request.session['cliente_id'] = cliente.id
+                    request.session['cliente_nome'] = cliente.nome
                     return redirect('ftelacli')
                 else:
                     messages.error(request, 'Senha incorreta.')
@@ -70,4 +73,15 @@ def login(request):
     return render(request, "login.html")
 
 def ftelacli(request):
+    if 'cliente_id' not in request.session:
+        return redirect('login')
     return render(request, "ftelacli.html")
+
+
+def logout(request):
+    try:
+        del request.session['cliente_id']
+        del request.session['cliente_nome']
+    except KeyError:
+        pass
+    return redirect('login')

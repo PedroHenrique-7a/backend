@@ -15,7 +15,7 @@
             <div class="col-md-8">
                 <h1 class="text-center">Cadastro de Produtos</h1>
 
-                <form method="post" action="{% url 'salvar' %}" enctype="multipart/form-data">
+                <form method="post" action="{% url 'produto:salvar' %}" enctype="multipart/form-data">
 
                      {% csrf_token %}
                     <div class="form-group">
